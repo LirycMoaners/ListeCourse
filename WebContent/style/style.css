@@ -1,0 +1,4 @@
+.listCourse-panel {
+	max-height:600px;
+	overflow-y: scroll;
+}
