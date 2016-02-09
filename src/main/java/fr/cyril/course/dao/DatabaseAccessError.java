@@ -10,6 +10,5 @@ public class DatabaseAccessError extends Exception {
 	
 	public DatabaseAccessError(String error, Throwable cause) {
 		super(error,cause);
-	}	
-
+	}
 }

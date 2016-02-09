@@ -18,7 +18,6 @@ public class DbUtils {
 		ds = (DataSource) envCtx.lookup("jdbc/projectfarm");
 		System.out.println("ICI");
 		return ds;
-
 	}
 
 	public static Connection getConnection() throws ClassNotFoundException,
@@ -33,10 +32,8 @@ public class DbUtils {
 	}
 
 	public static void dropConnection(Connection con) throws SQLException {
-
 		if (con != null) {
 			con.close();
 		}
 	}
-
 }

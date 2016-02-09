@@ -29,6 +29,12 @@ public class LinePlanningDB {
 			stmt.setInt(5, linePlanning.getNbPersonne());
 			stmt.setDate(6, (Date) linePlanning.getCreationDate());
 			stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+            	linePlanning.setId(generatedKeys.getInt(1));
+            else
+                throw new SQLException("Creating user failed, no ID obtained.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

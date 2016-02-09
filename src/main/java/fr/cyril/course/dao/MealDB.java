@@ -25,6 +25,12 @@ public class MealDB {
 			stmt.setString(1, meal.getName());
 			stmt.setDate(2, (Date) meal.getCreationDate());
 			stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+            	meal.setId(generatedKeys.getInt(1));
+            else
+                throw new SQLException("Creating user failed, no ID obtained.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

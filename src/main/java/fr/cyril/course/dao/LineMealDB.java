@@ -27,6 +27,12 @@ public class LineMealDB {
 			stmt.setInt(3, lineMeal.getQuantity());
 			stmt.setDate(4, (Date) lineMeal.getCreationDate());
 			stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+            	lineMeal.setId(generatedKeys.getInt(1));
+            else
+                throw new SQLException("Creating user failed, no ID obtained.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -24,11 +25,17 @@ public class ProductDB {
 	public static void saveProduct(Product product) throws DatabaseAccessError{
 		try {
 			con = DbUtils.getConnection();
-			PreparedStatement stmt = con.prepareStatement(PRODUCT_ADD);
+			PreparedStatement stmt = con.prepareStatement(PRODUCT_ADD,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, product.getName());
 			stmt.setBoolean(2, product.isComptable());
 			stmt.setDate(3, (Date) product.getCreationDate());
 			stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+            	product.setId(generatedKeys.getInt(1));
+            else
+                throw new SQLException("Creating user failed, no ID obtained.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

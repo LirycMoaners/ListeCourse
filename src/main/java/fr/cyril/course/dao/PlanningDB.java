@@ -12,18 +12,24 @@ import javax.naming.NamingException;
 import fr.cyril.course.dto.Planning;
 
 public class PlanningDB {
-	private static String LIST_ADD = "Insert into list (creationDate) values (?)";
-	private static String LIST_GET_LIST = "Select * from list";
-	private static String LIST_GET_ID = "Select * from list where id=?";
-	private static String LIST_UPDATE = "Update list set creationDate=? where id=?";
+	private static String LIST_ADD = "Insert into planning (creationDate) values (?)";
+	private static String LIST_GET_LIST = "Select * from planning";
+	private static String LIST_GET_ID = "Select * from planning where id=?";
+	private static String LIST_UPDATE = "Update planning set creationDate=? where id=?";
 	private static Connection con;
 	
-	public static void saveList(Planning list) throws DatabaseAccessError{
+	public static void savePlanning(Planning planning) throws DatabaseAccessError{
 		try {
 			con = DbUtils.getConnection();
 			PreparedStatement stmt = con.prepareStatement(LIST_ADD);
-			stmt.setDate(1, (Date) list.getCreationDate());
+			stmt.setDate(1, (Date) planning.getCreationDate());
 			stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+            	planning.setId(generatedKeys.getInt(1));
+            else
+                throw new SQLException("Creating user failed, no ID obtained.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -37,8 +43,8 @@ public class PlanningDB {
 			try {
 				DbUtils.dropConnection(con);
 				System.out.println("End of adding list");
-				LineListDB lineListDB = new LineListDB();
-				lineListDB.saveListLineList(list.getLineList(), list.getId());
+				LinePlanningDB linePlanningDB = new LinePlanningDB();
+				linePlanningDB.saveListLinePlanning(planning.getLinePlanning(), planning.getId());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -46,14 +52,14 @@ public class PlanningDB {
 		}
 	}
 	
-	public static List<Planning> getListListCourse() throws DatabaseAccessError {
+	public static List<Planning> getListPlanning() throws DatabaseAccessError {
 		List<Planning> p = null;
 		try {
 			con = DbUtils.getConnection();
 			PreparedStatement stmt = con.prepareStatement(LIST_GET_LIST);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p.add(new Planning(rs.getInt("id"), new LineListDB().getLineListList(rs.getInt("id")), rs.getDate("creationDate")));	
+				p.add(new Planning(rs.getInt("id"), null, rs.getDate("creationDate")));	
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -77,7 +83,7 @@ public class PlanningDB {
 		return p;
 	}
 	
-	public static Planning getList(int id) throws DatabaseAccessError{
+	public static Planning getPlanning(int id) throws DatabaseAccessError{
 		Planning p = null;
 		try {
 			con = DbUtils.getConnection();
@@ -85,7 +91,7 @@ public class PlanningDB {
 			stmt.setInt(1, id);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p = new Planning(id, new LineListDB().getLineListList(id), rs.getDate("creationDate"));	
+				p = new Planning(id, new LinePlanningDB().getLinePlanningList(id), rs.getDate("creationDate"));	
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -109,12 +115,12 @@ public class PlanningDB {
 		return p;
 	}
 	
-	public static void updateList(Planning list) throws DatabaseAccessError {
+	public static void updatePlanning(Planning planning) throws DatabaseAccessError {
 		try {
 			con = DbUtils.getConnection();
 			PreparedStatement stmt = con.prepareStatement(LIST_UPDATE);
-			stmt.setDate(1, (Date) list.getCreationDate());
-			stmt.setInt(2, list.getId());
+			stmt.setDate(1, (Date) planning.getCreationDate());
+			stmt.setInt(2, planning.getId());
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -128,8 +134,8 @@ public class PlanningDB {
 			try {
 				DbUtils.dropConnection(con);
 				System.out.println("End of updating list");
-				LineListDB lineListDB = new LineListDB();
-				lineListDB.updateListLineList(list.getLineList(), list.getId());
+				LinePlanningDB linePlanningDB = new LinePlanningDB();
+				linePlanningDB.updateListLinePlanning(planning.getLinePlanning(), planning.getId());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
