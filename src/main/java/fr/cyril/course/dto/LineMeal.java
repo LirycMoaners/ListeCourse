@@ -11,7 +11,7 @@ public class LineMeal {
 	public LineMeal() {
 		super();
 	}
-	public LineMeal(int quantity, Date creationDate, Product product) {
+	public LineMeal(int id, int quantity, Date creationDate, Product product) {
 		super();
 		this.quantity = quantity;
 		this.creationDate = creationDate;

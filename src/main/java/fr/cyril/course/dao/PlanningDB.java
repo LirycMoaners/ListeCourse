@@ -9,23 +9,20 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import fr.cyril.course.dto.LineList;
+import fr.cyril.course.dto.Planning;
 
-public class LineListDB {
-	private static String LINELIST_ADD = "Insert into lineList (idList,idProduct,quantity,creationDate) values (?,?,?,?)";
-	private static String LINELIST_GET_LIST = "Select * from lineList where idList=?";
-	private static String LINELIST_GET_ID = "Select * from lineList where id=?";
-	private static String LINELIST_UPDATE = "Update lineList set idList=?,idProduct=?,quantity=?,creationDate=? where id=?";
+public class PlanningDB {
+	private static String LIST_ADD = "Insert into list (creationDate) values (?)";
+	private static String LIST_GET_LIST = "Select * from list";
+	private static String LIST_GET_ID = "Select * from list where id=?";
+	private static String LIST_UPDATE = "Update list set creationDate=? where id=?";
 	private static Connection con;
 	
-	public static void saveLineList(LineList lineList, int idList) throws DatabaseAccessError{
+	public static void saveList(Planning list) throws DatabaseAccessError{
 		try {
 			con = DbUtils.getConnection();
-			PreparedStatement stmt = con.prepareStatement(LINELIST_ADD);
-			stmt.setInt(1, idList);
-			stmt.setInt(2, lineList.getProduct().getId());
-			stmt.setInt(3, lineList.getQuantity());
-			stmt.setDate(4, (Date) lineList.getCreationDate());
+			PreparedStatement stmt = con.prepareStatement(LIST_ADD);
+			stmt.setDate(1, (Date) list.getCreationDate());
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -39,7 +36,9 @@ public class LineListDB {
 		}  finally {
 			try {
 				DbUtils.dropConnection(con);
-				System.out.println("End of adding lineList");
+				System.out.println("End of adding list");
+				LineListDB lineListDB = new LineListDB();
+				lineListDB.saveListLineList(list.getLineList(), list.getId());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -47,20 +46,14 @@ public class LineListDB {
 		}
 	}
 	
-	public static void saveListLineList(List<LineList> lineLists, int idList) throws DatabaseAccessError{
-		for(LineList lineList : lineLists)
-			saveLineList(lineList, idList);
-	}
-	
-	public static List<LineList> getLineListList(int idList) throws DatabaseAccessError {
-		List<LineList> p = null;
+	public static List<Planning> getListListCourse() throws DatabaseAccessError {
+		List<Planning> p = null;
 		try {
 			con = DbUtils.getConnection();
-			PreparedStatement stmt = con.prepareStatement(LINELIST_GET_LIST);
-			stmt.setInt(1, idList);
+			PreparedStatement stmt = con.prepareStatement(LIST_GET_LIST);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p.add(new LineList(rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct"))));	
+				p.add(new Planning(rs.getInt("id"), new LineListDB().getLineListList(rs.getInt("id")), rs.getDate("creationDate")));	
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -75,7 +68,7 @@ public class LineListDB {
 		} finally {
 			try {
 				DbUtils.dropConnection(con);
-				System.out.println("End of getting list of lineList");
+				System.out.println("End of getting list of list");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,14 +77,15 @@ public class LineListDB {
 		return p;
 	}
 	
-	public static LineList getLineList(int id) throws DatabaseAccessError{
-		LineList p = null;
+	public static Planning getList(int id) throws DatabaseAccessError{
+		Planning p = null;
 		try {
 			con = DbUtils.getConnection();
-			PreparedStatement stmt = con.prepareStatement(LINELIST_GET_ID);
+			PreparedStatement stmt = con.prepareStatement(LIST_GET_ID);
+			stmt.setInt(1, id);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p = new LineList(rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct")));	
+				p = new Planning(id, new LineListDB().getLineListList(id), rs.getDate("creationDate"));	
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -106,7 +100,7 @@ public class LineListDB {
 		} finally {
 			try {
 				DbUtils.dropConnection(con);
-				System.out.println("End of getting lineList");
+				System.out.println("End of getting list");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -115,14 +109,12 @@ public class LineListDB {
 		return p;
 	}
 	
-	public static void updateLineList(LineList lineList, int idList) throws DatabaseAccessError {
+	public static void updateList(Planning list) throws DatabaseAccessError {
 		try {
 			con = DbUtils.getConnection();
-			PreparedStatement stmt = con.prepareStatement(LINELIST_UPDATE);
-			stmt.setInt(1, idList);
-			stmt.setInt(2, lineList.getProduct().getId());
-			stmt.setInt(3, lineList.getQuantity());
-			stmt.setDate(4, (Date) lineList.getCreationDate());
+			PreparedStatement stmt = con.prepareStatement(LIST_UPDATE);
+			stmt.setDate(1, (Date) list.getCreationDate());
+			stmt.setInt(2, list.getId());
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -135,16 +127,13 @@ public class LineListDB {
 		} finally {
 			try {
 				DbUtils.dropConnection(con);
-				System.out.println("End of updating lineList");
+				System.out.println("End of updating list");
+				LineListDB lineListDB = new LineListDB();
+				lineListDB.updateListLineList(list.getLineList(), list.getId());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}	
-	}
-	
-	public static void updateListLineList(List<LineList> lineList, int idList) throws DatabaseAccessError {
-		for(LineList l : lineList)
-			updateLineList(l,idList);
 	}
 }

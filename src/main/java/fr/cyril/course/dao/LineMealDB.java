@@ -60,7 +60,7 @@ public class LineMealDB {
 			stmt.setInt(1, idMeal);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p.add(new LineMeal(rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct"))));	
+				p.add(new LineMeal(rs.getInt("id"), rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct"))));	
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -91,7 +91,7 @@ public class LineMealDB {
 			PreparedStatement stmt = con.prepareStatement(LINEMEAL_GET_ID);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p = new LineMeal(rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct")));	
+				p = new LineMeal(rs.getInt("id"), rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct")));	
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -123,6 +123,7 @@ public class LineMealDB {
 			stmt.setInt(2, lineMeal.getProduct().getId());
 			stmt.setInt(3, lineMeal.getQuantity());
 			stmt.setDate(4, (Date) lineMeal.getCreationDate());
+			stmt.setInt(5, lineMeal.getId());
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

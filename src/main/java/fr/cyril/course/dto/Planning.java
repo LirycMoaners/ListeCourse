@@ -3,18 +3,18 @@ package fr.cyril.course.dto;
 import java.util.Date;
 import java.util.List;
 
-public class ListCourse {
+public class Planning {
     public int id;
-    public List<LineList> lineList;
+    public List<LinePlanning> linePlanning;
     public Date creationDate;
     
-	public ListCourse() {
+	public Planning() {
 		super();
 	}
-	public ListCourse(int id, List<LineList> lineList, Date creationDate) {
+	public Planning(int id, List<LinePlanning> linePlanning, Date creationDate) {
 		super();
 		this.id = id;
-		this.lineList = lineList;
+		this.linePlanning = linePlanning;
 		this.creationDate = creationDate;
 	}
 	
@@ -24,11 +24,11 @@ public class ListCourse {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public List<LineList> getLineList() {
-		return lineList;
+	public List<LinePlanning> getLinePlanning() {
+		return linePlanning;
 	}
-	public void setLineList(List<LineList> lineList) {
-		this.lineList = lineList;
+	public void setLinePlanning(List<LinePlanning> linePlanning) {
+		this.linePlanning = linePlanning;
 	}
 	public Date getCreationDate() {
 		return creationDate;
