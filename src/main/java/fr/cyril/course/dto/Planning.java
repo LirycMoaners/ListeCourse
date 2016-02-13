@@ -11,6 +11,10 @@ public class Planning {
 	public Planning() {
 		super();
 	}
+	public Planning(Date creationDate) {
+		super();
+		this.creationDate = creationDate;
+	}
 	public Planning(int id, List<LinePlanning> linePlanning, Date creationDate) {
 		super();
 		this.id = id;

@@ -3,7 +3,7 @@
 	overflow-y: auto;
 }
 
-.table {
+.table, .list-group {
 	margin-bottom:0px;
 }
 
@@ -19,4 +19,14 @@
 .add {
 	width:100%;
 	height:45px;
+}
+
+.panel-meal{
+	max-height:400px;
+	overflow-y:auto;
+}
+
+.table-newMeal{
+	max-height:392px;
+	overflow-y:auto;
 }

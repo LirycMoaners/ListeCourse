@@ -21,11 +21,127 @@
 									<h3 class="panel-title">Plats</h3>
 								</div>
 								<div class="panel-body">
-									<div class="list-group">
-										<a href="#" class="list-group-item">Pattes carbonara</a> <a
-											href="#" class="list-group-item">Purée Jambon</a> <a href="#"
-											class="list-group-item">Hamburger frites</a> <a href="#"
-											class="list-group-item">Riz poisson</a>
+									<div class="list-group panel-meal">
+										<a href="#" class="list-group-item clearfix">
+											Pattes carbonara
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										<a href="#" class="list-group-item clearfix">
+											Pattes carbonara
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										<a href="#" class="list-group-item clearfix">
+											Pattes carbonara
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										<a href="#" class="list-group-item clearfix">
+											Purée Jambon
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										<a href="#" class="list-group-item clearfix">
+											Hamburger frites
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
+										
+										<a href="#" class="list-group-item clearfix">
+											Riz poisson
+											<span class="pull-right button-group">
+												<button class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+											</span>
+										</a>
 									</div>
 								</div>
 							</div>
@@ -36,7 +152,7 @@
 									<h3 class="panel-title">Produits</h3>
 								</div>
 								<div class="panel-body">
-									<div class="table-responsive">
+									<div class="table-responsive panel-meal">
 										<table class="table">
 											<thead>
 												<tr>
@@ -45,6 +161,38 @@
 												</tr>
 											</thead>
 											<tbody>
+												<tr>
+													<td>gshshdhd</td>
+													<td>5</td>
+												</tr>
+												<tr>
+													<td>ghdhd</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>gshshdhd</td>
+													<td>5</td>
+												</tr>
+												<tr>
+													<td>ghdhd</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>gshshdhd</td>
+													<td>5</td>
+												</tr>
+												<tr>
+													<td>ghdhd</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>gshshdhd</td>
+													<td>5</td>
+												</tr>
+												<tr>
+													<td>ghdhd</td>
+													<td></td>
+												</tr>
 												<tr>
 													<td>gshshdhd</td>
 													<td>5</td>
@@ -102,7 +250,7 @@
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								data-target="#myModal">+ Produit</button>
 						</h1>
-						<div class="form-group table-responsive">
+						<div class="form-group table-responsive table-newMeal">
 							<table class="table">
 								<thead>
 									<tr>
@@ -111,6 +259,39 @@
 									</tr>
 								</thead>
 								<tbody>
+									<tr>
+										<td><select class="form-control">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+										</select></td>
+										<td><input type="text" class="form-control"
+											placeholder="Qté"></td>
+									</tr>
+									<tr>
+										<td><select class="form-control">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+										</select></td>
+										<td><input type="text" class="form-control"
+											placeholder="Qté"></td>
+									</tr>
+									<tr>
+										<td><select class="form-control">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+										</select></td>
+										<td><input type="text" class="form-control"
+											placeholder="Qté"></td>
+									</tr>
 									<tr>
 										<td><select class="form-control">
 												<option>1</option>
@@ -206,22 +387,21 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-inline">
-					<div class="form-group">
+					<div class="form-group col-sm-6">
 						<label for="exampleInputName2">Nom</label> <input type="text"
 							class="form-control" id="name" placeholder="Produit">
 					</div>
-					<div class="form-group">
+					<div class="form-group col-sm-6">
 						<label for="exampleInputEmail2">Dénombrable</label> <select
 							class="form-control" id="comptable">
 							<option>Oui</option>
 							<option>Non</option>
 						</select>
 					</div>
+					<div class="text-right">
+						<button type="button" class="btn btn-success">Ajouter</button>
+					</div>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-				<button type="submit" class="btn btn-success">Ajouter</button>
 			</div>
 		</div>
 	</div>

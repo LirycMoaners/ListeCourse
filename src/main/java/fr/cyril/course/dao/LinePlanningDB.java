@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.NamingException;
-
 import fr.cyril.course.dto.LinePlanning;
 
 public class LinePlanningDB {
@@ -20,7 +18,7 @@ public class LinePlanningDB {
 	
 	public static void saveLinePlanning(LinePlanning linePlanning, int idPlanning) throws DatabaseAccessError{
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEPLANNING_ADD);
 			stmt.setInt(1, idPlanning);
 			stmt.setString(1, linePlanning.getDay());
@@ -35,22 +33,10 @@ public class LinePlanningDB {
             	linePlanning.setId(generatedKeys.getInt(1));
             else
                 throw new SQLException("Creating user failed, no ID obtained.");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
 		}  finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of adding linePlanning");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of adding linePlanning");
 		}
 	}
 	
@@ -62,31 +48,17 @@ public class LinePlanningDB {
 	public static List<LinePlanning> getLinePlanningList(int idPlanning) throws DatabaseAccessError {
 		List<LinePlanning> p = null;
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEPLANNING_GET_LIST);
 			stmt.setInt(1, idPlanning);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p.add(new LinePlanning(rs.getInt("id"), rs.getString("day"), rs.getString("moment"), new MealDB().getMeal(rs.getInt("idMeal")), rs.getInt("nbPersonne"), rs.getDate("creationDate")));	
+				p.add(new LinePlanning(rs.getInt("id"), rs.getString("day"), rs.getString("moment"), MealDB.getMeal(rs.getInt("idMeal")), rs.getInt("nbPersonne"), rs.getDate("creationDate")));	
 			}
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		} finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of getting list of linePlanning");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of getting list of linePlanning");
 		}
 		return p;
 	}
@@ -94,37 +66,23 @@ public class LinePlanningDB {
 	public static LinePlanning getLinePlanning(int id) throws DatabaseAccessError{
 		LinePlanning p = null;
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEPLANNING_GET_ID);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p = new LinePlanning(id, rs.getString("day"), rs.getString("moment"), new MealDB().getMeal(rs.getInt("idMeal")), rs.getInt("nbPersonne"), rs.getDate("creationDate"));	
+				p = new LinePlanning(id, rs.getString("day"), rs.getString("moment"), MealDB.getMeal(rs.getInt("idMeal")), rs.getInt("nbPersonne"), rs.getDate("creationDate"));	
 			}
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		} finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of getting linePlanning");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of getting linePlanning");
 		}
 		return p;
 	}
 	
 	public static void updateLinePlanning(LinePlanning linePlanning, int idPlanning) throws DatabaseAccessError {
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEPLANNING_UPDATE);
 			stmt.setInt(1, idPlanning);
 			stmt.setString(1, linePlanning.getDay());
@@ -134,22 +92,10 @@ public class LinePlanningDB {
 			stmt.setDate(6, (Date) linePlanning.getCreationDate());
 			stmt.setInt(7, linePlanning.getId());
 			stmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
 		} finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of updating linePlanning");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of updating linePlanning");
 		}	
 	}
 	

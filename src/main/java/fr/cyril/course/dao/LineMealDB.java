@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.NamingException;
-
 import fr.cyril.course.dto.LineMeal;
 
 public class LineMealDB {
@@ -20,7 +18,7 @@ public class LineMealDB {
 	
 	public static void saveLineMeal(LineMeal lineMeal, int idMeal) throws DatabaseAccessError{
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEMEAL_ADD);
 			stmt.setInt(1, idMeal);
 			stmt.setInt(2, lineMeal.getProduct().getId());
@@ -33,23 +31,10 @@ public class LineMealDB {
             	lineMeal.setId(generatedKeys.getInt(1));
             else
                 throw new SQLException("Creating user failed, no ID obtained.");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		}  finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of adding lineMeal");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of adding lineMeal");
 		}
 	}
 	
@@ -61,31 +46,17 @@ public class LineMealDB {
 	public static List<LineMeal> getLineMealList(int idMeal) throws DatabaseAccessError {
 		List<LineMeal> p = null;
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEMEAL_GET_LIST);
 			stmt.setInt(1, idMeal);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p.add(new LineMeal(rs.getInt("id"), rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct"))));	
+				p.add(new LineMeal(rs.getInt("id"), rs.getInt("quantity"), rs.getDate("creationDate"), ProductDB.getProduct(rs.getInt("idProduct"))));	
 			}
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		} finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of getting list of lineMeal");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of getting list of lineMeal");
 		}
 		return p;
 	}
@@ -93,37 +64,23 @@ public class LineMealDB {
 	public static LineMeal getLineMeal(int id) throws DatabaseAccessError{
 		LineMeal p = null;
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEMEAL_GET_ID);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p = new LineMeal(rs.getInt("id"), rs.getInt("quantity"), rs.getDate("creationDate"), new ProductDB().getProduct(rs.getInt("idProduct")));	
+				p = new LineMeal(rs.getInt("id"), rs.getInt("quantity"), rs.getDate("creationDate"), ProductDB.getProduct(rs.getInt("idProduct")));	
 			}
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		} finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of getting lineMeal");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of getting lineMeal");
 		}
 		return p;
 	}
 	
 	public static void updateLineMeal(LineMeal lineMeal, int idMeal) throws DatabaseAccessError {
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(LINEMEAL_UPDATE);
 			stmt.setInt(1, idMeal);
 			stmt.setInt(2, lineMeal.getProduct().getId());
@@ -131,22 +88,10 @@ public class LineMealDB {
 			stmt.setDate(4, (Date) lineMeal.getCreationDate());
 			stmt.setInt(5, lineMeal.getId());
 			stmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
 		} finally {
-			try {
-				DbUtils.dropConnection(con);
-				System.out.println("End of updating lineMeal");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("End of updating lineMeal");
 		}	
 	}
 	

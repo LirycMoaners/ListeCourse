@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import javax.naming.NamingException;
-
-import fr.cyril.course.dao.DbUtils;
 import fr.cyril.course.dto.Product;
 import fr.cyril.course.dao.DatabaseAccessError;
 
@@ -24,7 +21,7 @@ public class ProductDB {
 	
 	public static void saveProduct(Product product) throws DatabaseAccessError{
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_ADD,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, product.getName());
 			stmt.setBoolean(2, product.isComptable());
@@ -36,21 +33,13 @@ public class ProductDB {
             	product.setId(generatedKeys.getInt(1));
             else
                 throw new SQLException("Creating user failed, no ID obtained.");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		}  finally {
 			try {
-				DbUtils.dropConnection(con);
+				DBManager.dropConnection();
 				System.out.println("End of adding product");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -59,28 +48,19 @@ public class ProductDB {
 	public static List<Product> getProductList() throws DatabaseAccessError {
 		List<Product> p = null;
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_GET_LIST);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
 				p.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getBoolean("comptable"),rs.getDate("creationDate")));	
 			}
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		} finally {
 			try {
-				DbUtils.dropConnection(con);
+				DBManager.dropConnection();
 				System.out.println("End of getting list of product");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -90,28 +70,19 @@ public class ProductDB {
 	public static Product getProduct(int id) throws DatabaseAccessError{
 		Product p = null;
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_GET_ID);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
 				p = new Product(rs.getInt("id"), rs.getString("name"), rs.getBoolean("comptable"),rs.getDate("creationDate"));	
 			}
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
-			
 		} finally {
 			try {
-				DbUtils.dropConnection(con);
+				DBManager.dropConnection();
 				System.out.println("End of getting product");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -120,27 +91,20 @@ public class ProductDB {
 	
 	public static void updateProduct(Product product) throws DatabaseAccessError {
 		try {
-			con = DbUtils.getConnection();
+			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_UPDATE);
 			stmt.setString(1, product.getName());
 			stmt.setBoolean(2, product.isComptable());
 			stmt.setDate(3, (Date) product.getCreationDate());
 			stmt.setInt(4, product.getId());
 			stmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println(e.getExplanation());
 		} finally {
 			try {
-				DbUtils.dropConnection(con);
+				DBManager.dropConnection();
 				System.out.println("End of updating product");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}	
