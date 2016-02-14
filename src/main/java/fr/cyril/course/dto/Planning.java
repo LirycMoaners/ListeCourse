@@ -1,21 +1,21 @@
 package fr.cyril.course.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Planning {
     public int id;
     public List<LinePlanning> linePlanning;
-    public Date creationDate;
+    public Timestamp creationDate;
     
 	public Planning() {
 		super();
 	}
-	public Planning(Date creationDate) {
+	public Planning(Timestamp creationDate) {
 		super();
 		this.creationDate = creationDate;
 	}
-	public Planning(int id, List<LinePlanning> linePlanning, Date creationDate) {
+	public Planning(int id, List<LinePlanning> linePlanning, Timestamp creationDate) {
 		super();
 		this.id = id;
 		this.linePlanning = linePlanning;
@@ -34,10 +34,10 @@ public class Planning {
 	public void setLinePlanning(List<LinePlanning> linePlanning) {
 		this.linePlanning = linePlanning;
 	}
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 }

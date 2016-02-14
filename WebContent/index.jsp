@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="/utils/header.jsp">
 	<jsp:param name="title" value="Liste Course" />
@@ -18,14 +19,21 @@
 		<div class="panel-body">
 			<div class="list-group listCourse-panel">
 				<c:forEach items="${listPlanning}" var="result">
-					<a href="#" class="list-group-item clearfix">
+					<div class="list-group-item clearfix">
 						${result.creationDate}
-						<span class="pull-right button-group">
-							<button class="btn btn-xs btn-danger">
-								<span class="glyphicon glyphicon-trash"></span>
-							</button>
-						</span>
-					</a>
+						<div class="pull-right">
+							<form method="POST" action="<%=request.getContextPath()%>/ConsultPlanningServlet">
+								<button type="submit" class="btn btn-xs btn-primary" name="idPlanning" value="${result.id}">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</button>
+							</form>
+							<form method="POST" action="<%=request.getContextPath()%>/DeletePlanningServlet">
+								<button type="submit" class="btn btn-xs btn-danger" name="idPlanning" value="${result.id}">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</form>
+						</div>
+					</div>
 				</c:forEach>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 package fr.cyril.course.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class LinePlanning {
 	private int id;
@@ -8,10 +8,10 @@ public class LinePlanning {
 	private String moment;
 	private Meal meal;
 	private int nbPersonne;
-	private Date creationDate;
+	private Timestamp creationDate;
 	
 	public LinePlanning(int id, String day, String moment, Meal meal,
-			int nbPersonne, Date creationDate) {
+			int nbPersonne, Timestamp creationDate) {
 		super();
 		this.id = id;
 		this.day = day;
@@ -51,10 +51,10 @@ public class LinePlanning {
 	public void setNbPersonne(int nbPersonne) {
 		this.nbPersonne = nbPersonne;
 	}
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 }

@@ -1,17 +1,17 @@
 package fr.cyril.course.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class LineMeal {
     public int id;
     public int quantity;
-    public Date creationDate;
+    public Timestamp creationDate;
     public Product product;
     
 	public LineMeal() {
 		super();
 	}
-	public LineMeal(int id, int quantity, Date creationDate, Product product) {
+	public LineMeal(int id, int quantity, Timestamp creationDate, Product product) {
 		super();
 		this.quantity = quantity;
 		this.creationDate = creationDate;
@@ -30,10 +30,10 @@ public class LineMeal {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 	public Product getProduct() {
@@ -42,6 +42,4 @@ public class LineMeal {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
-    
 }

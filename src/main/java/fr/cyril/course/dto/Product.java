@@ -1,17 +1,17 @@
 package fr.cyril.course.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Product {
     public int id;
     public String name;
     public boolean comptable;
-    public Date creationDate;
+    public Timestamp creationDate;
     
 	public Product() {
 		super();
 	}
-	public Product(int id, String name, boolean comptable, Date creationDate) {
+	public Product(int id, String name, boolean comptable, Timestamp creationDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,10 +37,10 @@ public class Product {
 	public void setComptable(boolean comptable) {
 		this.comptable = comptable;
 	}
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 }

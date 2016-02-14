@@ -15,7 +15,6 @@ public class DBManager {
 		try {
 			Class.forName(driver);
 			connect = DriverManager.getConnection(url, login, password);
-			connect.setAutoCommit(false);
 			System.out.println("Connexion reussie");
 		} catch (ClassNotFoundException e) {
 			System.out.println("erreur chargement pilote JDBC \n");
@@ -30,7 +29,7 @@ public class DBManager {
 	public static Connection getConnect() throws SQLException {
 		if (!(connect instanceof Connection)) {
 			initConnexion("com.mysql.jdbc.Driver",
-					"jdbc:mysql://localhost:3306/listeCourse", "root", "");
+					"jdbc:mysql://localhost/listecourse", "root", "");
 		}
 		return connect;
 	}

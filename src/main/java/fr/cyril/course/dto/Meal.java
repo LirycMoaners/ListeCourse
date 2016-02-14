@@ -1,18 +1,18 @@
 package fr.cyril.course.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Meal {
     public int id;
     public String name;
     public List<LineMeal> lineMeal;
-    public Date creationDate;
+    public Timestamp creationDate;
     
 	public Meal() {
 		super();
 	}
-	public Meal(int id, String name, List<LineMeal> lineMeal, Date creationDate) {
+	public Meal(int id, String name, List<LineMeal> lineMeal, Timestamp creationDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,10 +38,10 @@ public class Meal {
 	public void setLineMeal(List<LineMeal> lineMeal) {
 		this.lineMeal = lineMeal;
 	}
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 }

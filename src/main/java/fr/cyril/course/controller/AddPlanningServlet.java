@@ -2,6 +2,7 @@ package fr.cyril.course.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class AddPlanningServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-		Planning planning = new Planning(new Date());
+		Planning planning = new Planning(new Timestamp(new Date().getTime()));
 
 		try {
 			PlanningDB.savePlanning(planning);
