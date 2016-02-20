@@ -62,7 +62,8 @@ public class MealDB {
 		try {
 			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(MEAL_GET_ID);
-			ResultSet rs =stmt.executeQuery();
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				p = new Meal(rs.getInt("id"), rs.getString("name"), LineMealDB.getLineMealList(rs.getInt("id")), rs.getTimestamp("creationDate"));	
 			}

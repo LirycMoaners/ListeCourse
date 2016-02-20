@@ -8,17 +8,17 @@
 }
 
 .liste {
-	max-height:499.6px;
+	max-height:539.6px;
 }
 
 .table-liste {
 	overflow-y:auto;
-	max-height:440px;
+	max-height:580px;
 }
 
 .add {
 	width:100%;
-	height:45px;
+	height:65px;
 }
 
 .panel-meal{

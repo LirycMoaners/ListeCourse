@@ -22,7 +22,7 @@
 					<div class="list-group-item clearfix">
 						${result.creationDate}
 						<div class="pull-right">
-							<form method="POST" action="<%=request.getContextPath()%>/ConsultPlanningServlet">
+							<form method="POST" action="<%=request.getContextPath()%>/GetLinePlanningListServlet">
 								<button type="submit" class="btn btn-xs btn-primary" name="idPlanning" value="${result.id}">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</button>

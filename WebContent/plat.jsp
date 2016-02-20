@@ -15,220 +15,69 @@
 					<h3 class="panel-title">Liste des plats</h3>
 				</div>
 				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="panel panel-success">
-								<div class="panel-heading">
-									<h3 class="panel-title">Plats</h3>
+					<form method="post" action="<%=request.getContextPath()%>/AddListLinePlanningServlet">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-success">
+									<div class="panel-heading">
+										<h3 class="panel-title">Plats</h3>
+									</div>
+									<div class="panel-body">
+										<div class="list-group panel-meal">
+											<c:forEach items="${listMeal}" var="meal">
+												<a href="#${meal.id}" class="list-group-item clearfix" data-toggle="collapse">
+													<input type="checkbox" name="meals" value="${meal}">
+													${meal.name}
+												</a>
+											</c:forEach>
+										</div>
+									</div>
 								</div>
-								<div class="panel-body">
-									<div class="list-group panel-meal">
-										<a href="#" class="list-group-item clearfix">
-											Pattes carbonara
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										<a href="#" class="list-group-item clearfix">
-											Pattes carbonara
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										<a href="#" class="list-group-item clearfix">
-											Pattes carbonara
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										<a href="#" class="list-group-item clearfix">
-											Purée Jambon
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										<a href="#" class="list-group-item clearfix">
-											Hamburger frites
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
-										
-										<a href="#" class="list-group-item clearfix">
-											Riz poisson
-											<span class="pull-right button-group">
-												<button class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
-											</span>
-										</a>
+							</div>
+							<div class="col-md-6">
+								<div class="panel panel-warning">
+									<div class="panel-heading">
+										<h3 class="panel-title">Produits</h3>
+									</div>
+									<div class="panel-body">
+										<div class="table-responsive panel-meal">
+											<table class="table">
+												<thead>
+													<tr>
+														<th>Produit</th>
+														<th>Quantité</th>
+													</tr>
+												</thead>
+												<c:forEach items="${listMeal}" var="meal">
+													<tbody id="${meal.id}" class="collapse">
+														<c:forEach items="${meal.lineMeal}" var="lineMeal">
+															<tr>
+																<td>${lineMeal.product.name}</td>
+																<td>${lineMeal.quantity}</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</c:forEach>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="panel panel-warning">
-								<div class="panel-heading">
-									<h3 class="panel-title">Produits</h3>
-								</div>
-								<div class="panel-body">
-									<div class="table-responsive panel-meal">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Produit</th>
-													<th>Quantité</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>gshshdhd</td>
-													<td>5</td>
-												</tr>
-												<tr>
-													<td>ghdhd</td>
-													<td></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+						<div class="row">
+							<div class="col-md-2"></div>
+							<div class="col-md-3">
+								<label for="nbPersonne">Nombre de personnes : </label>
 							</div>
+							<div class="col-md-2">
+								<input type="number" class="form-control" id="nbPersonne" name="nbPersonne" value="1" min="1">
+							</div>
+							<div class="col-md-3">
+								<button type="button" class="btn btn-success">Ajouter</button>
+							</div>
+							<div class="col-md-2"></div>
 						</div>
-					</div>
-					<h1 class="text-center">
-						<button type="button" class="btn btn-success">Ajouter</button>
-					</h1>
-
+					</form>
 				</div>
 			</div>
 		</div>
@@ -362,9 +211,19 @@
 								</tbody>
 							</table>
 						</div>
-						<h1 class="text-center">
-							<button type="submit" class="btn btn-success">Ajouter</button>
-						</h1>
+						<div class="row">
+							<div class="col-md-2"></div>
+							<div class="col-md-3">
+								<label for="nbPersonne">Nombre de personnes : </label>
+							</div>
+							<div class="col-md-2">
+								<input type="number" class="form-control" id="nbPersonne" name="nbPersonne" value="1" min="1">
+							</div>
+							<div class="col-md-3">
+								<button type="button" class="btn btn-success">Ajouter</button>
+							</div>
+							<div class="col-md-2"></div>
+						</div>
 					</form>
 				</div>
 			</div>

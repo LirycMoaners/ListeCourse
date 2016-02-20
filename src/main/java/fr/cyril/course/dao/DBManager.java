@@ -29,7 +29,7 @@ public class DBManager {
 	public static Connection getConnect() throws SQLException {
 		if (!(connect instanceof Connection)) {
 			initConnexion("com.mysql.jdbc.Driver",
-					"jdbc:mysql://localhost/listecourse", "root", "");
+					"jdbc:mysql://localhost/planningcourse", "root", "");
 		}
 		return connect;
 	}

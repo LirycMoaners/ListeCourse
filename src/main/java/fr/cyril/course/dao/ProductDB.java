@@ -64,6 +64,7 @@ public class ProductDB {
 		try {
 			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_GET_ID);
+			stmt.setInt(1, id);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
 				p = new Product(rs.getInt("id"), rs.getString("name"), rs.getBoolean("comptable"),rs.getTimestamp("creationDate"));	
