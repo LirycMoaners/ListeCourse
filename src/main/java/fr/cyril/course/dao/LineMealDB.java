@@ -15,6 +15,7 @@ public class LineMealDB {
 	private static String LINEMEAL_GET_LIST = "Select * from lineMeal where idMeal=?";
 	private static String LINEMEAL_GET_ID = "Select * from lineMeal where id=?";
 	private static String LINEMEAL_UPDATE = "Update lineMeal set idMeal=?,idProduct=?,quantity=?,creationDate=? where id=?";
+	private static String LINEMEAL_DELETE_LIST = "Delete from lineMeal where idMeal=?";
 	private static Connection con;
 	
 	public static void saveLineMeal(LineMeal lineMeal, int idMeal) throws DatabaseAccessError{
@@ -103,5 +104,19 @@ public class LineMealDB {
 	public static void updateListLineMeal(List<LineMeal> lineMeals, int idMeal) throws DatabaseAccessError{
 		for(LineMeal lineMeal : lineMeals)
 			updateLineMeal(lineMeal, idMeal);
+	}
+	
+	public static void deleteListLineMeal(int id){
+		try {
+			con = DBManager.getConnect();
+			PreparedStatement stmt = con.prepareStatement(LINEMEAL_DELETE_LIST);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("End of deleting lineMeal list");
+		}	
 	}
 }

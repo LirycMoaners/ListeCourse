@@ -5,17 +5,20 @@ import java.sql.Timestamp;
 public class Product {
     public int id;
     public String name;
-    public boolean comptable;
     public Timestamp creationDate;
     
 	public Product() {
 		super();
 	}
-	public Product(int id, String name, boolean comptable, Timestamp creationDate) {
+	public Product(int id, String name, Timestamp creationDate) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.comptable = comptable;
+		this.creationDate = creationDate;
+	}
+	public Product(String name, Timestamp creationDate) {
+		super();
+		this.name = name;
 		this.creationDate = creationDate;
 	}
 	
@@ -30,12 +33,6 @@ public class Product {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public boolean isComptable() {
-		return comptable;
-	}
-	public void setComptable(boolean comptable) {
-		this.comptable = comptable;
 	}
 	public Timestamp getCreationDate() {
 		return creationDate;

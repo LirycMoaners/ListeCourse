@@ -21,14 +21,14 @@
 				<c:forEach items="${listPlanning}" var="result">
 					<div class="list-group-item clearfix">
 						${result.creationDate}
-						<div class="pull-right">
-							<form method="POST" action="<%=request.getContextPath()%>/GetLinePlanningListServlet">
-								<button type="submit" class="btn btn-xs btn-primary" name="idPlanning" value="${result.id}">
+						<div class="pull-right" role="group">
+							<form method="POST" class="col-md-6" action="<%=request.getContextPath()%>/GetLinePlanningListServlet">
+								<button type="submit" class="btn btn-primary" name="idPlanning" value="${result.id}">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</button>
 							</form>
-							<form method="POST" action="<%=request.getContextPath()%>/DeletePlanningServlet">
-								<button type="submit" class="btn btn-xs btn-danger" name="idPlanning" value="${result.id}">
+							<form method="POST" class="col-md-6" action="<%=request.getContextPath()%>/DeletePlanningServlet">
+								<button type="submit" class="btn btn-danger" name="idPlanning" value="${result.id}">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</form>

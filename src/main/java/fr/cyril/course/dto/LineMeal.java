@@ -13,6 +13,13 @@ public class LineMeal {
 	}
 	public LineMeal(int id, int quantity, Timestamp creationDate, Product product) {
 		super();
+		this.id = id;
+		this.quantity = quantity;
+		this.creationDate = creationDate;
+		this.product = product;
+	}
+	public LineMeal(int quantity, Timestamp creationDate, Product product) {
+		super();
 		this.quantity = quantity;
 		this.creationDate = creationDate;
 		this.product = product;

@@ -8,14 +8,17 @@
 </jsp:include>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-5">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Liste des plats</h3>
-				</div>
-				<div class="panel-body">
-					<form method="post" action="<%=request.getContextPath()%>/AddListLinePlanningServlet">
+		<form method="post" action="<%=request.getContextPath()%>/AddLinePlanningServlet">
+			<input type="hidden" name="idPlanning" value="${idPlanning}">
+			<input type="hidden" name="day" value="${day}">
+			<input type="hidden" name="moment" value="${moment}">
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Liste des plats</h3>
+					</div>
+					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="panel panel-success">
@@ -24,11 +27,25 @@
 									</div>
 									<div class="panel-body">
 										<div class="list-group panel-meal">
-											<c:forEach items="${listMeal}" var="meal">
-												<a href="#${meal.id}" class="list-group-item clearfix" data-toggle="collapse">
-													<input type="checkbox" name="meals" value="${meal}">
-													${meal.name}
-												</a>
+											<c:forEach var="entry" items="${listMeal}">
+												<div class="list-group-item clearfix checkbox">
+													<label>
+														<c:choose>
+															<c:when test="${entry.value==0}">
+																<input type="checkbox" name="meals" value="${entry.key.id}" data-target="#${entry.key.id}" data-parent="#meals" data-toggle="collapse">
+															</c:when>
+															<c:otherwise>
+																<input type="checkbox" name="meals" value="${entry.key.id}" data-target="#${entry.key.id}" data-parent="#meals" data-toggle="collapse" checked>
+															</c:otherwise>
+														</c:choose>
+														${entry.key.name}
+													</label>
+													<div class="pull-right" role="group">
+														<button type="submit" class="btn btn-danger" name="Valider" value="${entry.key.id}">
+															<span class="glyphicon glyphicon-trash"></span>
+														</button>
+													</div>
+												</div>
 											</c:forEach>
 										</div>
 									</div>
@@ -41,22 +58,36 @@
 									</div>
 									<div class="panel-body">
 										<div class="table-responsive panel-meal">
-											<table class="table">
+											<table class="table" id="meals">
 												<thead>
 													<tr>
 														<th>Produit</th>
 														<th>Quantité</th>
 													</tr>
 												</thead>
-												<c:forEach items="${listMeal}" var="meal">
-													<tbody id="${meal.id}" class="collapse">
-														<c:forEach items="${meal.lineMeal}" var="lineMeal">
-															<tr>
-																<td>${lineMeal.product.name}</td>
-																<td>${lineMeal.quantity}</td>
-															</tr>
-														</c:forEach>
-													</tbody>
+												<c:forEach var="entry" items="${listMeal}">
+													<c:choose>
+														<c:when test="${entry.value==0}">
+															<tbody id="${entry.key.id}" class="collapse out">
+																<c:forEach items="${entry.key.lineMeal}" var="lineMeal">
+																	<tr>
+																		<td>${lineMeal.product.name}</td>
+																		<td>${lineMeal.quantity}</td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</c:when>
+														<c:otherwise>
+															<tbody id="${entry.key.id}" class="collapse in">
+																<c:forEach items="${entry.key.lineMeal}" var="lineMeal">
+																	<tr>
+																		<td>${lineMeal.product.name}</td>
+																		<td>${lineMeal.quantity}</td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</c:otherwise>
+													</c:choose>
 												</c:forEach>
 											</table>
 										</div>
@@ -70,200 +101,88 @@
 								<label for="nbPersonne">Nombre de personnes : </label>
 							</div>
 							<div class="col-md-2">
-								<input type="number" class="form-control" id="nbPersonne" name="nbPersonne" value="1" min="1">
+								<c:choose>
+    								<c:when test="${empty nbPersonne}">
+										<input type="number" class="form-control" id="nbPersonne" name="nbPersonne" value="1" min="1">
+									</c:when>
+									<c:otherwise>
+										<input type="number" class="form-control" id="nbPersonne" name="nbPersonne" value="${nbPersonne}" min="1">
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="col-md-3">
-								<button type="button" class="btn btn-success">Ajouter</button>
+								<input type="submit" class="btn btn-success" name="Valider" value="Valider">
 							</div>
 							<div class="col-md-2"></div>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Nouveau plat</h3>
-				</div>
-				<div class="panel-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="name" class="col-sm-5 control-label">Nom</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="name"
-									placeholder="Nom du plat">
+			<div class="col-md-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Nouveau plat</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-4"></div>
+								<label for="name" class="col-sm-1 control-label">Nom</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="name"
+										placeholder="Nom du plat">
+								</div>
+								<div class="col-sm-4"></div>
 							</div>
-							<div class="col-sm-4"></div>
-						</div>
-						<h1 class="text-right">
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#myModal">+ Produit</button>
-						</h1>
-						<div class="form-group table-responsive table-newMeal">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Produit</th>
-										<th>Quantité</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-										</select></td>
-										<td><input type="text" class="form-control"
-											placeholder="Qté"></td>
-									</tr>
-								</tbody>
-							</table>
 						</div>
 						<div class="row">
-							<div class="col-md-2"></div>
-							<div class="col-md-3">
-								<label for="nbPersonne">Nombre de personnes : </label>
+							<div class="form-group table-responsive table-newMeal">
+								<table class="table" id="tab_logic">
+									<thead>
+										<tr>
+											<th>Produit</th>
+											<th>Quantité</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr id='product0'>
+											<td>
+												<input type="text" class="form-control" list="produit" name="produit" placeholder="Produit"/>
+												<datalist id='produit'>
+													<c:forEach items="${listProduct}" var="product">
+														<option>${product.name}</option>
+													</c:forEach>
+												</datalist>
+											</td>
+											<td>
+												<input type="number" name='qte' class="form-control" placeholder='Qté' value="0" min="0">
+											</td>
+										</tr>
+										<tr id='product1'></tr>
+									</tbody>
+								</table>
 							</div>
-							<div class="col-md-2">
-								<input type="number" class="form-control" id="nbPersonne" name="nbPersonne" value="1" min="1">
-							</div>
-							<div class="col-md-3">
-								<button type="button" class="btn btn-success">Ajouter</button>
-							</div>
-							<div class="col-md-2"></div>
 						</div>
-					</form>
+						<div class="row">
+							<a id="add_row" class="btn btn-default pull-left">+ Ajouter</a>
+							<a id='delete_row' class="pull-right btn btn-default">- Supprimer</a>
+						</div>
+						<div class="row">
+							<div class="text-center">
+								<input type="submit" class="btn btn-success" name="Valider" value="Ajouter">
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-1"></div>
+			<div class="col-md-1"></div>
+		</form>
 	</div>
-	<h1 class="text-center">
-		<button type="button" class="btn btn-danger">Retour</button>
-	</h1>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">Nouveau produit</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-inline">
-					<div class="form-group col-sm-6">
-						<label for="exampleInputName2">Nom</label> <input type="text"
-							class="form-control" id="name" placeholder="Produit">
-					</div>
-					<div class="form-group col-sm-6">
-						<label for="exampleInputEmail2">Dénombrable</label> <select
-							class="form-control" id="comptable">
-							<option>Oui</option>
-							<option>Non</option>
-						</select>
-					</div>
-					<div class="text-right">
-						<button type="button" class="btn btn-success">Ajouter</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+	<form method="POST" action="<%=request.getContextPath()%>/GetLinePlanningListServlet">
+		<h1 class="text-center">
+			<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+			<input type="submit" class="btn btn-danger" value="Retour"/>
+		</h1>
+	</form>
 </div>
 <jsp:include page="/utils/footer.jsp" />

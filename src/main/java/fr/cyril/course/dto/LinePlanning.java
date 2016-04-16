@@ -20,6 +20,15 @@ public class LinePlanning {
 		this.nbPersonne = nbPersonne;
 		this.creationDate = creationDate;
 	}
+	public LinePlanning(String day, String moment, Meal meal,
+			int nbPersonne, Timestamp creationDate) {
+		super();
+		this.day = day;
+		this.moment = moment;
+		this.meal = meal;
+		this.nbPersonne = nbPersonne;
+		this.creationDate = creationDate;
+	}
 	
 	public int getId() {
 		return id;

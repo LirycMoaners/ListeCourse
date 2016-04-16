@@ -12,7 +12,7 @@ import fr.cyril.course.dto.Planning;
 
 public class PlanningDB {
 	private static String LIST_ADD = "Insert into planning (creationDate) values (?)";
-	private static String LIST_GET_LIST = "Select * from planning";
+	private static String LIST_GET_LIST = "Select * from planning order by creationDate desc";
 	private static String LIST_GET_ID = "Select * from planning where id=?";
 	private static String LIST_UPDATE = "Update planning set creationDate=? where id=?";
 	private static String LIST_DELETE = "Delete from planning where id=?";

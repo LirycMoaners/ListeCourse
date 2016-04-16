@@ -10,6 +10,36 @@
 <link rel="stylesheet" href="/ListeCourse/style/style.css">
 <script src="/ListeCourse/ext/jquery/1.11.2/jquery-1.11.2.js"></script>
 <script src="/ListeCourse/ext/bootstrap/3.2.2/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		var i = 1;
+		
+		$("#add_row").click(function() {
+			$('#product' + i).html(
+				"<td>"
+				+ "<input type='text' class='form-control' list='produit' name='produit'/>"
+				+ "<datalist id='produit'>"
+				+ "<option value='' disabled selected>Produit</option>"
+				+ "<c:forEach items='${listProduct}' var='product'>"
+				+ "<option>${product.name}</option>"
+				+ "</c:forEach>"
+				+ "</datalist>"
+				+ "</td>"
+				+ "<td>"
+				+ "<input type='number' name='qte' class='form-control' placeholder='Qté' min='0' value='0'>"
+				+ "</td>");
+			$('#tab_logic').append('<tr id="product' + (i + 1) + '"></tr>');
+			i++;
+		});
+		
+		$("#delete_row").click(function() {
+			if (i > 1) {
+				$("#product" + (i - 1)).html('');
+				i--;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="page-header">

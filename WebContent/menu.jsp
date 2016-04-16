@@ -30,15 +30,14 @@
 										<td>Lundi</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Lundi"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['LundiMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Lundi"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['LundiMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['LundiMidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -51,15 +50,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Lundi"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['LundiSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Lundi"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['LundiSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['LundiSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -75,15 +73,14 @@
 										<td>Mardi</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Mardi"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['MardiMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Mardi"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['MardiMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['MardiMidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -96,15 +93,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Mardi"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['MardiSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Mardi"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['MardiSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['MardiSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -120,15 +116,14 @@
 										<td>Mercredi</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Mercredi"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['MercrediMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Mercredi"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['MercrediMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['MercrediMidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -141,15 +136,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Mercredi"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['MercrediSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Mercredi"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['MercrediSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['MercrediSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -165,15 +159,14 @@
 										<td>Jeudi</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Jeudi"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['JeudiMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Jeudi"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['JeudiMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['JeudiMidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -186,15 +179,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Jeudi"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['JeudiSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Jeudi"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['JeudiSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['JeudiSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -210,15 +202,14 @@
 										<td>Vendredi</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Vendredi"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['VendrediMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Vendredi"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['VendrediMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['VendrediMidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -231,15 +222,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Vendredi"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['VendrediSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Vendredi"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['VendrediSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['VendrediSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -255,15 +245,14 @@
 										<td>Samedi</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Samedi"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['SamediMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Samedi"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['SamediMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['LundiMSamediMidiidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -276,15 +265,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Samedi"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['SamediSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Samedi"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['SamediSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['SamediSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -300,15 +288,14 @@
 										<td>Dimanche</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Dimanche"/>
+												<input type="hidden" name="moment" value="Midi"/>
 												<c:choose>
 													<c:when test="${empty menu['DimancheMidi']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Dimanche"/>
-														<input type="hidden" name="moment" value="Midi"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['DimancheMidi']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['DimancheMidi']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>
@@ -321,15 +308,14 @@
 										</td>
 										<td>
 											<form method="POST" action="<%=request.getContextPath()%>/GetListMealServlet">
+												<input type="hidden" name="idPlanning" value="${idPlanning}"/>
+												<input type="hidden" name="day" value="Dimanche"/>
+												<input type="hidden" name="moment" value="Soir"/>
 												<c:choose>
 													<c:when test="${empty menu['DimancheSoir']}">
-														<input type="hidden" name="idPlanning" value="${idPlanning}"/>
-														<input type="hidden" name="day" value="Dimanche"/>
-														<input type="hidden" name="moment" value="Soir"/>
 														<input type="submit" class="btn btn-success add" value="Ajouter"/>
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="listLinePlanning" value="${menu['DimancheSoir']}"/>
 														<button type="submit" class="btn btn-primary add">
 															<c:forEach items="${menu['DimancheSoir']}" var="linePlanning">
 																${linePlanning.meal.name}<br/>

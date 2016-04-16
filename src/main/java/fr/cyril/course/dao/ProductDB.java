@@ -13,10 +13,11 @@ import fr.cyril.course.dao.DatabaseAccessError;
 
 public class ProductDB {
 	
-	private static String PRODUCT_ADD = "Insert into product (name,comptable,creationDate) values (?,?,?)";
+	private static String PRODUCT_ADD = "Insert into product (name,creationDate) values (?,?)";
 	private static String PRODUCT_GET_LIST = "Select * from product";
 	private static String PRODUCT_GET_ID = "Select * from product where id=?";
-	private static String PRODUCT_UPDATE = "Update product set name=?,comptable=?,creationDate=? where id=?";
+	private static String PRODUCT_GET_NAME = "Select * from product where name=?";
+	private static String PRODUCT_UPDATE = "Update product set name=?,creationDate=? where id=?";
 	private static Connection con;
 	
 	public static void saveProduct(Product product) throws DatabaseAccessError{
@@ -24,8 +25,7 @@ public class ProductDB {
 			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_ADD,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, product.getName());
-			stmt.setBoolean(2, product.isComptable());
-			stmt.setTimestamp(3, product.getCreationDate());
+			stmt.setTimestamp(2, product.getCreationDate());
 			stmt.executeUpdate();
 			
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
@@ -48,7 +48,7 @@ public class ProductDB {
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_GET_LIST);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getBoolean("comptable"),rs.getTimestamp("creationDate")));	
+				p.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("creationDate")));	
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -67,7 +67,26 @@ public class ProductDB {
 			stmt.setInt(1, id);
 			ResultSet rs =stmt.executeQuery();
 			while(rs.next()){
-				p = new Product(rs.getInt("id"), rs.getString("name"), rs.getBoolean("comptable"),rs.getTimestamp("creationDate"));	
+				p = new Product(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("creationDate"));	
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("End of getting product");
+		}
+		return p;
+	}
+	
+	public static Product getProduct(String name) throws DatabaseAccessError{
+		Product p = null;
+		try {
+			con = DBManager.getConnect();
+			PreparedStatement stmt = con.prepareStatement(PRODUCT_GET_NAME);
+			stmt.setString(1, name);
+			ResultSet rs =stmt.executeQuery();
+			while(rs.next()){
+				p = new Product(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("creationDate"));	
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -83,9 +102,8 @@ public class ProductDB {
 			con = DBManager.getConnect();
 			PreparedStatement stmt = con.prepareStatement(PRODUCT_UPDATE,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, product.getName());
-			stmt.setBoolean(2, product.isComptable());
-			stmt.setTimestamp(3, product.getCreationDate());
-			stmt.setInt(4, product.getId());
+			stmt.setTimestamp(2, product.getCreationDate());
+			stmt.setInt(3, product.getId());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {

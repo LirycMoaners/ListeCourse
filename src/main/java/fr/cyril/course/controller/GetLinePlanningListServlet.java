@@ -59,7 +59,7 @@ public class GetLinePlanningListServlet extends HttpServlet {
 				
 				for(LineMeal lineMeal : linePlanning.getMeal().getLineMeal()){
 					for(Map<String,String> product : listProduct){
-						if(product.get("id") == String.valueOf(lineMeal.getProduct().getId())){
+						if(product.get("id").equals(String.valueOf(lineMeal.getProduct().getId()))){
 							mealExist = true;
 							product.put("qty",String.valueOf(Integer.valueOf(product.get("qty"))+lineMeal.getQuantity()*linePlanning.getNbPersonne()));
 						}
@@ -71,6 +71,7 @@ public class GetLinePlanningListServlet extends HttpServlet {
 						newProduct.put("qty",String.valueOf(lineMeal.getQuantity()*linePlanning.getNbPersonne()));
 						listProduct.add(newProduct);
 					}
+					mealExist = false;
 				}
 			}
 			request.setAttribute("menu", menu);

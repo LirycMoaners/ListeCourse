@@ -12,9 +12,11 @@ import fr.cyril.course.dto.LinePlanning;
 
 public class LinePlanningDB {
 	private static String LINEPLANNING_ADD = "Insert into linePlanning (idPlanning,day,moment,idMeal,nbPersonne,creationDate) values (?,?,?,?,?,?)";
+	private static String LINEPLANNING_GET_LIST_DAY = "Select * from linePlanning where idPlanning=? and day=? and moment=?";
 	private static String LINEPLANNING_GET_LIST = "Select * from linePlanning where idPlanning=?";
 	private static String LINEPLANNING_GET_ID = "Select * from linePlanning where id=?";
 	private static String LINEPLANNING_UPDATE = "Update linePlanning set idPlanning=?,day=?,moment=?,idMeal=?,nbPersonne=?,creationDate=? where id=?";
+	private static String LINEPLANNING_DELETE_LIST_DAY = "Delete from linePlanning where idPlanning=? and day=? and moment=?";
 	private static String LINEPLANNING_DELETE_LIST = "Delete from linePlanning where idPlanning=?";
 	private static Connection con;
 	
@@ -46,6 +48,27 @@ public class LinePlanningDB {
 	public static void saveListLinePlanning(List<LinePlanning> linePlannings, int idPlanning) throws DatabaseAccessError{
 		for(LinePlanning linePlanning : linePlannings)
 			saveLinePlanning(linePlanning, idPlanning);
+	}
+	
+	public static List<LinePlanning> getLinePlanningListDay(int idPlanning, String day, String moment) throws DatabaseAccessError {
+		List<LinePlanning> p = new ArrayList<LinePlanning>();
+		try {
+			con = DBManager.getConnect();
+			PreparedStatement stmt = con.prepareStatement(LINEPLANNING_GET_LIST_DAY);
+			stmt.setInt(1, idPlanning);
+			stmt.setString(2, day);
+			stmt.setString(3, moment);
+			ResultSet rs =stmt.executeQuery();
+			while(rs.next()){
+				p.add(new LinePlanning(rs.getInt("id"), rs.getString("day"), rs.getString("moment"), MealDB.getMeal(rs.getInt("idMeal")), rs.getInt("nbPersonne"), rs.getTimestamp("creationDate")));	
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("End of getting list of linePlanning");
+		}
+		return p;
 	}
 	
 	public static List<LinePlanning> getLinePlanningList(int idPlanning) throws DatabaseAccessError {
@@ -108,6 +131,22 @@ public class LinePlanningDB {
 	public static void updateListLinePlanning(List<LinePlanning> linePlannings, int idPlanning) throws DatabaseAccessError{
 		for(LinePlanning linePlanning : linePlannings)
 			updateLinePlanning(linePlanning, idPlanning);
+	}
+	
+	public static void deleteListLinePlanningDay(int id, String day, String moment){
+		try {
+			con = DBManager.getConnect();
+			PreparedStatement stmt = con.prepareStatement(LINEPLANNING_DELETE_LIST_DAY);
+			stmt.setInt(1, id);
+			stmt.setString(2, day);
+			stmt.setString(3, moment);
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("End of deleting linePlanning list");
+		}	
 	}
 	
 	public static void deleteListLinePlanning(int id){

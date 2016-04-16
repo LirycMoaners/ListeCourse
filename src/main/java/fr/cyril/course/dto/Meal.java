@@ -19,6 +19,12 @@ public class Meal {
 		this.lineMeal = lineMeal;
 		this.creationDate = creationDate;
 	}
+	public Meal(String name, List<LineMeal> lineMeal, Timestamp creationDate) {
+		super();
+		this.name = name;
+		this.lineMeal = lineMeal;
+		this.creationDate = creationDate;
+	}
 	
 	public int getId() {
 		return id;
